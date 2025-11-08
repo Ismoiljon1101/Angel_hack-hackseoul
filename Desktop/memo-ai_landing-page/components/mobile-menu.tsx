@@ -15,8 +15,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     <div className="fixed inset-0 z-50 md:hidden">
-      <div className="fixed inset-0 bg-background/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="fixed left-0 top-0 h-full w-64 bg-background border-r shadow-lg">
+      <div 
+        className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-opacity" 
+        onClick={onClose} 
+      />
+      <div className="fixed right-0 top-0 h-full w-64 bg-background border-l shadow-lg slide-in-from-right">
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-4 border-b">
             <span className="text-lg font-bold">Menu</span>
@@ -24,7 +27,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <X className="h-5 w-5" />
             </Button>
           </div>
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
             <Button variant="ghost" className="w-full justify-start" asChild>
               <Link href="/services" onClick={onClose}>Services</Link>
             </Button>

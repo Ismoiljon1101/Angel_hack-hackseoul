@@ -1,6 +1,8 @@
 "use client"
 
 import { Navbar } from "@/components/navbar"
+import { TrustedCompanies } from "@/components/trusted-companies"
+import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -90,18 +92,7 @@ export default function Home() {
       </section>
 
       {/* Partners/Trusted By Section */}
-      <section className="border-y py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-sm text-muted-foreground text-center mb-6">Trusted by employees at</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-12 w-12 rounded-full bg-muted border flex items-center justify-center">
-                <span className="text-xs font-semibold">Logo</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TrustedCompanies />
 
       {/* Benefits Section - Bento Box Style */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -209,17 +200,20 @@ export default function Home() {
             Choose the plan that works for you. All plans include a 14-day free trial.
           </p>
         </div>
-        <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 max-w-5xl mx-auto overflow-x-auto pb-4 md:pb-0 scroll-smooth">
+        <div className="flex md:grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto overflow-x-auto pb-4 md:pb-0 md:overflow-visible">
           {/* Starter Plan */}
-          <Card className="min-w-[280px] md:min-w-0 flex-shrink-0 md:flex-shrink">
-            <CardHeader>
+          <Card className="min-w-[300px] md:min-w-0 flex-shrink-0 md:flex-shrink flex flex-col">
+            <CardHeader className="flex-grow">
               <CardTitle className="text-2xl">Starter</CardTitle>
               <div className="mt-4">
                 <span className="text-4xl font-bold">$100</span>
                 <span className="text-muted-foreground">/month</span>
               </div>
+              <CardDescription className="mt-2">
+                Perfect for individuals
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 flex-grow">
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
@@ -243,7 +237,7 @@ export default function Home() {
                 </li>
               </ul>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mt-auto">
               <Button className="w-full" variant="outline" asChild>
                 <Link href="/pricing">Get Started</Link>
               </Button>
@@ -251,20 +245,23 @@ export default function Home() {
           </Card>
 
           {/* Pro Plan - Most Popular */}
-          <Card className="min-w-[300px] md:min-w-0 flex-shrink-0 md:flex-shrink border-2 border-primary relative scale-[1.05] md:scale-100">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+          <Card className="min-w-[320px] md:min-w-0 flex-shrink-0 md:flex-shrink border-2 border-primary relative flex flex-col md:scale-105 md:z-10">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+              <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold whitespace-nowrap">
                 Most Popular
               </span>
             </div>
-            <CardHeader>
+            <CardHeader className="flex-grow pt-6">
               <CardTitle className="text-2xl">Pro</CardTitle>
               <div className="mt-4">
                 <span className="text-4xl font-bold">$200</span>
                 <span className="text-muted-foreground">/month</span>
               </div>
+              <CardDescription className="mt-2">
+                Best for growing teams
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 flex-grow">
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
@@ -292,7 +289,7 @@ export default function Home() {
                 </li>
               </ul>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mt-auto">
               <Button className="w-full" asChild>
                 <Link href="/pricing">Get Started</Link>
               </Button>
@@ -300,15 +297,18 @@ export default function Home() {
           </Card>
 
           {/* Advanced Plan */}
-          <Card className="min-w-[280px] md:min-w-0 flex-shrink-0 md:flex-shrink">
-            <CardHeader>
+          <Card className="min-w-[300px] md:min-w-0 flex-shrink-0 md:flex-shrink flex flex-col">
+            <CardHeader className="flex-grow">
               <CardTitle className="text-2xl">Advanced</CardTitle>
               <div className="mt-4">
                 <span className="text-4xl font-bold">$300</span>
                 <span className="text-muted-foreground">/month</span>
               </div>
+              <CardDescription className="mt-2">
+                For enterprises
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 flex-grow">
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
@@ -336,7 +336,7 @@ export default function Home() {
                 </li>
               </ul>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mt-auto">
               <Button className="w-full" variant="outline" asChild>
                 <Link href="/pricing">Get Started</Link>
               </Button>
@@ -346,57 +346,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="bg-muted/50 py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold">Loved by people worldwide</h2>
-            <p className="text-lg text-muted-foreground">
-              See what our customers are saying
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "Product Manager",
-                content: "MemoAI has completely transformed how I work. I've saved over 15 hours per week!",
-                rating: 5
-              },
-              {
-                name: "Michael Chen",
-                role: "CEO, TechStart",
-                content: "The best investment we've made. Our team productivity has increased by 40%.",
-                rating: 5
-              },
-              {
-                name: "Emily Rodriguez",
-                role: "Freelance Designer",
-                content: "Simple to use, powerful features. This is exactly what I needed for my workflow.",
-                rating: 5
-              },
-            ].map((testimonial, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <CardDescription className="text-base">
-                    "{testimonial.content}"
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsCarousel />
 
       {/* FAQ Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
