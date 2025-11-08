@@ -1,16 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 const companies = [
-  { id: 1, name: "TechCorp", color: "bg-blue-500" },
-  { id: 2, name: "InnovateLab", color: "bg-purple-500" },
-  { id: 3, name: "DataFlow", color: "bg-green-500" },
-  { id: 4, name: "CloudSync", color: "bg-orange-500" },
-  { id: 5, name: "NextGen", color: "bg-pink-500" },
-  { id: 6, name: "SmartSys", color: "bg-indigo-500" },
-  { id: 7, name: "FutureTech", color: "bg-teal-500" },
-  { id: 8, name: "DigitalPro", color: "bg-red-500" },
+  { id: 1, address: "/companies/apple.svg" },
+  { id: 2, address: "/companies/google.svg" },
+  { id: 3, address: "/companies/hyundai.svg" },
+  { id: 4, address: "/companies/kia.svg" },
+  { id: 5, address: "/companies/nvidia.svg" },
+  { id: 6, address: "/companies/samsung.svg" },
+  { id: 7, address: "/companies/tesla.svg" },
 ]
 
 export function TrustedCompanies() {
@@ -34,9 +34,9 @@ export function TrustedCompanies() {
   return (
     <section className="border-y py-12 bg-muted/30 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-sm text-muted-foreground text-center mb-8 font-medium">
-          Trusted by employees at
-        </p>
+      <p className="text-3xl text-muted-foreground text-center mb-8 font-bold">
+        Trusted by
+      </p>
         <div className="relative">
           <div className="overflow-hidden">
             <div 
@@ -45,22 +45,27 @@ export function TrustedCompanies() {
                 transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`
               }}
             >
-              {companies.map((company, index) => (
+              {companies.map((company) => (
                 <div
                   key={company.id}
                   className="flex-shrink-0 px-3"
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
-                  <div className="flex items-center justify-center h-20">
-                    <div className={`${company.color} rounded-xl w-full h-14 flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer`}>
-                      <span className="text-white font-bold text-sm md:text-base">{company.name}</span>
-                    </div>
+                  <div className="flex items-center justify-center h-40">
+                    <Image
+                      src={company.address}
+                      alt={`Logo of ${company.address.split("/").pop()?.split(".")[0]}`}
+                      width={120}
+                      height={100}
+                      className="object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    />
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+
         {/* Dots indicator */}
         <div className="flex justify-center gap-2 mt-8">
           {Array.from({ length: Math.max(1, companies.length - itemsPerView + 1) }).map((_, index) => (
@@ -80,4 +85,3 @@ export function TrustedCompanies() {
     </section>
   )
 }
-

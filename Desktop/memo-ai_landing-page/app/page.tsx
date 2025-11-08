@@ -1,5 +1,6 @@
 "use client"
-
+import { Globe } from "@/components/ui/globe";
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { TrustedCompanies } from "@/components/trusted-companies"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
@@ -21,75 +22,121 @@ import {
 } from "lucide-react"
 
 export default function Home() {
+
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            {/* Social Proof */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border text-sm">
-              <Users className="h-4 w-4" />
-              <span>1000+ active users</span>
-            </div>
-            
-            {/* Title/Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              Transform Your Workflow with
-              <span className="text-primary"> Intelligent Automation</span>
-            </h1>
-            
-            {/* Problem Statement & Explanation */}
-            <div className="space-y-4">
-              <p className="text-lg text-muted-foreground">
-                Tired of repetitive tasks eating up your time? MemoAI automates your workflow, 
-                giving you hours back every day to focus on what truly matters.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                Download our powerful desktop application and experience the future of productivity. 
-                Works offline, syncs seamlessly, and integrates with all your favorite tools.
-              </p>
-            </div>
-            
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button 
-                size="lg" 
-                className="text-lg px-8"
-                onClick={() => {
-                  const link = document.createElement('a')
-                  link.href = '/memoai-dummy.zip'
-                  link.download = 'memoai.zip'
-                  document.body.appendChild(link)
-                  link.click()
-                  document.body.removeChild(link)
-                }}
-              >
-                <Download className="mr-2 h-5 w-5" />
-                Download Now
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </Button>
-            </div>
+      <section className="relative overflow-hidden container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      {/* 🌍 Background Globe */}
+      <div className="absolute inset-0 z-0 opacity-30 flex items-center justify-center">
+      <Globe
+        className="w-full max-w-[1200px] h-[1200px] mt-50"
+        config={{
+          width: 1200,
+          height: 1200,
+          phi: 0,
+          theta: 0.3,
+          dark: 0,          // remove glassy shadow
+          diffuse: 0.8,     // solid shading
+          mapBrightness: 1.2,
+          baseColor: [1, 1, 1],                     // keep white
+          markerColor: [251 / 255, 100 / 255, 21 / 255], // keep orange
+          glowColor: [1, 1, 1],                     // remove glow
+          mapSamples: 16000,
+          markers: [
+            { location: [14.5995, 120.9842], size: 0.03 },
+            { location: [19.076, 72.8777], size: 0.1 },
+            { location: [23.8103, 90.4125], size: 0.05 },
+            { location: [30.0444, 31.2357], size: 0.07 },
+            { location: [39.9042, 116.4074], size: 0.08 },
+            { location: [-23.5505, -46.6333], size: 0.1 },
+            { location: [19.4326, -99.1332], size: 0.1 },
+            { location: [40.7128, -74.006], size: 0.1 },
+            { location: [34.6937, 135.5022], size: 0.05 },
+            { location: [41.0082, 28.9784], size: 0.06 },
+          ],
+          devicePixelRatio: 2,
+          onRender: () => {},
+      
+        }}
+      />
+
+      </div>
+
+      {/* 🧱 Actual Content (kept above globe) */}
+      <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-8">
+          {/* Social Proof */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border text-sm">
+            <Users className="h-4 w-4" />
+            <span>1000+ active users</span>
           </div>
-          
-          {/* Product Video/Screenshot Placeholder */}
-          <div className="relative">
-            <div className="aspect-video rounded-lg border-2 border-dashed border-muted-foreground/25 bg-muted/50 flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                  <Play className="h-8 w-8 text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground">Product video or screenshot</p>
+
+          {/* Title/Heading */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+            Transform Your Workflow with
+            <span className="text-primary"> Intelligent Automation</span>
+          </h1>
+
+          {/* Problem Statement & Explanation */}
+          <div className="space-y-4">
+            <p className="text-lg text-muted-foreground">
+              Tired of repetitive tasks eating up your time? MemoAI automates your workflow,
+              giving you hours back every day to focus on what truly matters.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Download our powerful desktop application and experience the future of productivity.
+              Works offline, syncs seamlessly, and integrates with all your favorite tools.
+            </p>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <Button
+              size="lg"
+              className="text-lg px-8"
+              onClick={() => {
+                const link = document.createElement('a')
+                link.href = '/memoai-dummy.zip'
+                link.download = 'memoai.zip'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+              }}
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Download Now
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-8">
+              <Play className="mr-2 h-5 w-5" />
+              Watch Demo
+            </Button>
+          </div>
+        </div>
+
+        {/* Product Video/Screenshot Placeholder */}
+        <div className="relative h-full">
+          <div className="w-full h-full rounded-lg border-2 border-dashed border-muted-foreground/25 bg-muted/50 flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+                <Play className="h-8 w-8 text-primary" />
               </div>
+              <p className="text-sm text-muted-foreground">Product video or screenshot</p>
             </div>
           </div>
         </div>
+
+      </div>
       </section>
+
+
 
       {/* Partners/Trusted By Section */}
       <TrustedCompanies />

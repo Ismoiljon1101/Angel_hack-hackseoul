@@ -59,14 +59,13 @@ const testimonials = [
 export function TestimonialsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const itemsPerView = 3 // ✅ show 3 at once
 
   useEffect(() => {
     if (!isAutoPlaying) return
-
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+      setCurrentIndex((prev) => (prev + 1) % Math.ceil(testimonials.length / itemsPerView))
     }, 5000)
-
     return () => clearInterval(interval)
   }, [isAutoPlaying])
 
@@ -77,13 +76,13 @@ export function TestimonialsCarousel() {
   }
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setCurrentIndex((prev) => (prev - 1 + Math.ceil(testimonials.length / itemsPerView)) % Math.ceil(testimonials.length / itemsPerView))
     setIsAutoPlaying(false)
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(testimonials.length / itemsPerView))
     setIsAutoPlaying(false)
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
@@ -98,16 +97,22 @@ export function TestimonialsCarousel() {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-6xl mx-auto"> {/* wider container */}
           {/* Carousel Container */}
           <div className="relative overflow-hidden rounded-lg">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{
+                transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
+              }}
             >
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="min-w-full px-4">
-                  <Card className="border-2">
+                <div
+                  key={index}
+                  className="flex-shrink-0 px-4"
+                  style={{ width: `${100 / itemsPerView}%` }}
+                >
+                  <Card className="h-full border-2 shadow-sm hover:shadow-md transition-shadow duration-300">
                     <CardHeader>
                       <div className="flex items-center gap-4 mb-4">
                         <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg flex-shrink-0">
@@ -156,14 +161,14 @@ export function TestimonialsCarousel() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
+            {Array.from({ length: Math.ceil(testimonials.length / itemsPerView) }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={`h-2 rounded-full transition-all ${
                   currentIndex === index ? 'w-8 bg-primary' : 'w-2 bg-muted-foreground/30'
                 }`}
-                aria-label={`Go to testimonial ${index + 1}`}
+                aria-label={`Go to testimonial group ${index + 1}`}
               />
             ))}
           </div>
@@ -172,4 +177,3 @@ export function TestimonialsCarousel() {
     </section>
   )
 }
-

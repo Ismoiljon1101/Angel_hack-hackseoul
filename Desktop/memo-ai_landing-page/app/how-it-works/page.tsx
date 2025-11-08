@@ -18,9 +18,6 @@ export default function HowItWorksPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <Card className="text-center">
             <CardHeader>
-              <div className="h-20 w-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-3xl font-bold mx-auto mb-6">
-                1
-              </div>
               <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <Download className="h-8 w-8 text-primary" />
               </div>
@@ -40,9 +37,6 @@ export default function HowItWorksPage() {
 
           <Card className="text-center">
             <CardHeader>
-              <div className="h-20 w-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-3xl font-bold mx-auto mb-6">
-                2
-              </div>
               <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <Settings className="h-8 w-8 text-primary" />
               </div>
@@ -62,9 +56,6 @@ export default function HowItWorksPage() {
 
           <Card className="text-center">
             <CardHeader>
-              <div className="h-20 w-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-3xl font-bold mx-auto mb-6">
-                3
-              </div>
               <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-8 w-8 text-primary" />
               </div>
